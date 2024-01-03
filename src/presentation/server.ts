@@ -1,17 +1,37 @@
-import express from 'express'
-import bodyParser from 'body-parser'
+import express, { Express } from 'express'
 import helmet from 'helmet'
+import userRoutes from './routes/userRoutes'
 
-const app = express()
-const port = process.env.PORT || 3000
+class Server {
+  private app: Express
 
-app.use(bodyParser.json())
-app.use(helmet())
+  constructor() {
+    this.app = express()
+    this.configMiddleware()
+    this.configRoutes()
+    // this.handleErrors()
+  }
 
-app.get('/', (req, res) => {
-  res.send({
-    name: 'Pedro',
-  })
-})
+  private configMiddleware(): void {
+    this.app.use(express.json())
+    this.app.use(helmet())
+  }
 
-export { app, port }
+  private configRoutes(): void {
+    this.app.use('/api', userRoutes)
+  }
+
+  // private handleErrors(): void {
+  //   this.app.use(errorHandler)
+  // }
+
+  public start(port: number): void {
+    this.app.listen(port, () => {
+      console.log(`Server is running on port ${port}`)
+    })
+  }
+}
+
+const server = new Server()
+
+export default server

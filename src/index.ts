@@ -1,10 +1,10 @@
-import { app, port } from './presentation/server'
+import server from './presentation/server'
+
+const port = process.env.PORT || 3000
 
 const startServer = async () => {
   try {
-    app.listen(port, () => {
-      console.log(`Server is running on port ${port}`)
-    })
+    server.start(port as number)
   } catch (error) {
     console.error('Error starting server:', error)
   }
