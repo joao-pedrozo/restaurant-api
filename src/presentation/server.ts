@@ -9,7 +9,9 @@ app.use(bodyParser.json())
 app.use(helmet())
 
 app.get('/', (req, res) => {
-  res.send('Hello, Express 1!')
+  res.send({
+    name: 'Pedro',
+  })
 })
 
 export { app, port }
