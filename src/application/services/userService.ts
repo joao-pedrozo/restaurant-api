@@ -11,6 +11,14 @@ class UserService {
       where: { id: userId },
     })
   }
+
+  async addUser(name: string) {
+    return database.user.create({
+      data: {
+        name,
+      },
+    })
+  }
 }
 
 export default UserService

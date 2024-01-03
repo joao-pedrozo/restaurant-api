@@ -33,6 +33,29 @@ class UserController {
       res.status(500).json({ error: 'Internal Server Error' })
     }
   }
+
+  async addUser(req: Request, res: Response): Promise<void> {
+    try {
+      const name = req.body.name
+
+      console.log(req.params)
+
+      if (!name) {
+        res.status(422).json({
+          error: 'User name missing',
+        })
+
+        return
+      }
+
+      const user = await this.userService.addUser(name)
+
+      res.json(user)
+    } catch (error) {
+      console.error('Error adding user:', error)
+      res.status(500).json({ error: 'Internal Server Error' })
+    }
+  }
 }
 
 export default UserController
