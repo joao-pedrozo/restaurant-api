@@ -1,6 +1,7 @@
 import express, { Express } from 'express'
 import helmet from 'helmet'
 import userRoutes from './routes/userRoutes'
+import itemRoutes from './routes/itemsRoutes'
 
 class Server {
   private app: Express
@@ -19,6 +20,7 @@ class Server {
 
   private configRoutes(): void {
     this.app.use('/api', userRoutes)
+    this.app.use('/api', itemRoutes)
   }
 
   // private handleErrors(): void {

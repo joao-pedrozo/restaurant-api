@@ -5,7 +5,7 @@ export interface Item {
   name: string
   description: string
   price: number
-  orders: Order[]
+  orders?: Order[]
   createdAt: Date
   updatedAt: Date
 }
